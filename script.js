@@ -17,9 +17,13 @@
     // fix width
     $(".doc > div").attr("style", "padding: 0 !important;");
 
-    $("sup > a").each(function(i, v) {
-        console.log()
+    // fix list margins (deep lists can make content un-readable
+    $("li").each(function(i, v) {
+        $(this).css("margin-left", parseInt($(this).css("margin-left"))/4 + "pt");
+    });
 
+    // comment displaying
+    $("sup > a").each(function(i, v) {
         // get links
         var cmnt = $(this).attr("href");
         // get comment text
@@ -31,7 +35,8 @@
         // fancy styling
         var container = $(this).parent().parent().children("span");
         container.attr("title", txt);
-        container.css("border-bottom", "2px dotted rgb(255, 0, 0)");
+        container.css("background", "transparent");
+        container.css("border-bottom", "3px dotted rgb(255, 0, 0)");
         container.css("padding", "0 7px");
 
         // remove original link text
@@ -40,7 +45,7 @@
         // fun flashy comment
         setInterval(function() {
             container.css("border-bottom-color", "rgb(" + ran() + ", " + ran() + ", " + ran() + ")");
-        }, 100);
+        }, 500);
 
     });
 
